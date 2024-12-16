@@ -13,7 +13,7 @@ const NavItem: React.FC<NavItemProps> = ({
 }) => {
   const pathname = usePathname()
   return (
-    <Link href={link} className={`flex p-4 items-center w-full hover:bg-gray-700 font-medium ${pathname === link ? 'bg-gray-600 border-r-4 border-r-green-500' : ''}`}>
+    <Link href={link} className={`flex p-4 items-center w-full hover:bg-gray-700 font-medium gap-1 ${pathname === link ? 'bg-gray-600 border-r-4 border-r-green-500' : ''}`}>
       <div>{icon}</div>
       <div>{label}</div>
     </Link>
