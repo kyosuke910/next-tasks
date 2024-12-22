@@ -1,6 +1,17 @@
-import React from 'react'
+'use client';
+import { TaskDocument } from '@/models/task';
+import { useState } from 'react';
 
-const EditTaskForm = () => {
+interface EditTaskFormProps {
+  task: TaskDocument;
+}
+
+const EditTaskForm: React.FC<EditTaskFormProps> = ({ task }) => {
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
+  const [dueDate, setDueDate] = useState(task.dueDate);
+  const [isCompleted, setIsCompleted] = useState(task.isCompleted);
+
   return (
     <div className="mt-10 mx-auto w-full max-w-sm">
       <form action="">
@@ -14,6 +25,8 @@ const EditTaskForm = () => {
             name="title"
             required
             className="block mt-2 py-1.5 px-2 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="mt-6">
@@ -26,6 +39,8 @@ const EditTaskForm = () => {
             name="description"
             required
             className="block mt-2 py-1.5 px-2 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="mt-6">
@@ -40,11 +55,22 @@ const EditTaskForm = () => {
             max="2999-12-31"
             required
             className="block mt-2 py-1.5 px-2 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
           />
         </div>
-        <div className='mt-6 flex items-center'>
-          <input type="checkbox" id='isCompleted' name='isCompleted' className='mr-2 w-4 h-4' />
-          <label htmlFor="isCompleted" className='text-sm'>タスクを完了にする</label>
+        <div className="mt-6 flex items-center">
+          <input
+            type="checkbox"
+            id="isCompleted"
+            name="isCompleted"
+            className="mr-2 w-4 h-4"
+            checked={isCompleted}
+            onChange={(e) => setIsCompleted(e.target.checked)}
+          />
+          <label htmlFor="isCompleted" className="text-sm">
+            タスクを完了にする
+          </label>
         </div>
         <button
           type="submit"
@@ -54,7 +80,7 @@ const EditTaskForm = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default EditTaskForm
+export default EditTaskForm;
